@@ -1,4 +1,4 @@
-# MyApplication
+# Teoria de Colas
 Teoria de Colas en Kotlin para Android
 
 ![photo_2017-11-30_21-52-34](https://user-images.githubusercontent.com/9899682/33467378-ba099370-d619-11e7-9c13-7839ac043645.jpg)
