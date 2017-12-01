@@ -132,7 +132,7 @@ class RESPUESTAS : AppCompatActivity() {
             val s = valores[2]
             val k=valores[3]
             textView15.text = "λ = ${formateador(lambda,long)}, μ = ${formateador(mu,long)}, S = ${s.toInt()} y K = ${k.toInt()}"
-
+            //Probabilidades
         }
 
     }
