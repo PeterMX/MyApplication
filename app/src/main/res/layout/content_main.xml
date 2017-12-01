@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.uriel.myapplication.MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/boton">
+
+        <TextView
+            android:id="@+id/textView5M"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="21dp"
+            android:text="@string/landa" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView5M"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="31dp"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:labelFor="@+id/editText" />
+
+        <TextView
+            android:id="@+id/textView6M"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="41dp"
+            android:text="@string/mu" />
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/editText"
+            android:layout_below="@+id/textView6M"
+            android:layout_marginTop="46dp"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:labelFor="@+id/editText2" />
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

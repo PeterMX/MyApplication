@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Teoria de Colas</string>
+    <string name="action_settings">Configurar</string>
+    <string name="landa">Lambda(λ)</string>
+    <string name="mu">Mu(μ)</string>
+    <string name="calcular">CALCULAR</string>
+    <string name="textview"></string>
+    <string name="probabilidades">Probabilidades:</string>
+    <string name="tiempo_medio_de_espera">Tiempo medio de espera:</string>
+    <string name="n_mero_esperado_de_unidades">Número esperado de unidades:</string>
+    <string name="m_m_1"><font color="#22424B" size="46">M/M/1</font>\n\<font color="#4E7367" size="18">Población infinita, capacidad del sistema infinito, un canal de servicio.</font></string>
+    <string name="m_m_s"><font color="#22424B" size="46">M/M/S</font>\n\<font color="#4E7367" size="18">Población infinita, capacidad del sistema infinito, S canales de servicio.</font></string>
+    <string name="m_m_1_c"><font color="#22424B" size="46">M/M/1/C</font>\n\<font color="#4E7367" size="18">Población de tamaño C, capacidad del sistema infinito, un canal de servicio.</font></string>
+    <string name="m_m_s_c"><font color="#22424B" size="46">M/M/S/C</font>\n\<font color="#4E7367" size="18">Población de tamaño C, capacidad del sistema infinito, S canales de servicio.</font></string>
+    <string name="m_m_1_K"><font color="#22424B" size="46">M/M/1/K</font>\n\<font color="#4E7367" size="18">Población infinita, capacidad del sistema limitado a K, un canal de servicio.</font></string>
+    <string name="m_m_s_K"><font color="#22424B" size="46">M/M/S/K</font>\n\<font color="#4E7367" size="18">Población infinita, capacidad del sistema limitado a K, S canales de servicio.</font></string>
+    <string name="tama_o_de_la_poblaci_n">Tamaño de la población</string>
+    <string name="l_mite_del_sistema">Límite del sistema</string>
+    <string name="canales_de_servicio">Canales de servicio</string>
+
+
+</resources>
