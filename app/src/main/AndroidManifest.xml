@@ -43,7 +43,8 @@
         <activity
             android:name=".MMSK"
             android:screenOrientation="portrait" />
-        <activity android:name=".RESPUESTAS"></activity>
+        <activity android:name=".RESPUESTAS" />
+        <activity android:name=".configurar"></activity>
     </application>
 
 </manifest>

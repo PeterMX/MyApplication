@@ -13,7 +13,7 @@ class MM1K : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mm1_k)
         title = "M/M/1/K"
-        supportActionBar?.subtitle = "Sistema linitado a K"
+        supportActionBar?.subtitle = "Sistema limitado a K"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
