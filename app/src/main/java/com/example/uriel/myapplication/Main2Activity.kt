@@ -2,6 +2,10 @@ package com.example.uriel.myapplication
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main2.*
 import java.io.FileInputStream
 
@@ -68,6 +72,39 @@ class Main2Activity : AppCompatActivity() {
             else -> return string.toString()
         }
 
+    }
+
+    private fun showSimpleAlert() {
+
+        val simpleAlert = AlertDialog.Builder(this@Main2Activity).create()
+        simpleAlert.setTitle("Terminos")
+        simpleAlert.setMessage("replace with message")
+
+        simpleAlert.setButton(AlertDialog.BUTTON_POSITIVE, "OK", {
+            dialogInterface, i ->
+            Toast.makeText(applicationContext, "Selecciono OK", Toast.LENGTH_SHORT).show()
+        })
+
+        simpleAlert.show()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.help, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        return when (item.itemId) {
+            R.id.action_help -> {
+
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 

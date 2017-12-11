@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Teoria de Colas</string>
     <string name="action_settings">Configurar</string>
+    <string name="action_help">Información</string>
     <string name="landa">Lambda(λ)</string>
     <string name="mu">Mu(μ)</string>
     <string name="calcular">CALCULAR</string>
