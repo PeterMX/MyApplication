@@ -37,6 +37,12 @@ class RESPUESTAS : AppCompatActivity() {
         val tipo = intent.getIntExtra("tipo",0)
         if (tipo == 3){
             supportActionBar?.subtitle = "M/M/1/C"
+            mensaje = "λ = Tasa de llegadas\nμ = Tasa de servicio\nC = Tamaño de la población\n" +
+                    "Ls = Número esperado de unidades en el sistema\nLq = Número esperado de unidades en la cola\n" +
+                    "Ws = Tiempo medio de espera en el sistema\n Wq = Tiempo medio de espera en la cola\n" +
+                    "ρ = Probabilidad de encontrar el sistema ocupado\nP0 = Encontrar el sistema vacio\n" +
+                    "Pn = Encontrar n unidades en el sistema\n"
+
             val valores = intent.getDoubleArrayExtra("valores")
             val lambda = valores[0]
             val mu = valores[1]
@@ -58,11 +64,11 @@ class RESPUESTAS : AppCompatActivity() {
             space20.visibility = View.GONE
 
             textView15.text = "λ = ${formateador(lambda,long)}, μ = ${formateador(mu,long)} y C = ${m.toInt()}"
-            textView17.text = "L = m-(μ/λ)(1-P0) = ${formateador(L,long)}"
+            textView17.text = "Ls = m-(μ/λ)(1-P0) = ${formateador(L,long)}"
             textView18.text = "Lq = m-(λ+μ/λ)(1-P0) = ${formateador(Lq,long)}"
             //textView19.text = "Lo = Sρ = ${formateador(s,long)}*${formateador((lambda/(mu*s)),long)} = ${formateador(s*(lambda/(mu*s)),long)}"
             //textView20.text = "LD = S-Lo = ${formateador(s,long)}-${formateador(s*(lambda/(mu*s)),long)} = ${formateador(s-(s*(lambda/(mu*s))),long)}"
-            textView22.text = "W = Wq+(1/μ) = ${formateador(W,long)}"
+            textView22.text = "Ws = Wq+(1/μ) = ${formateador(W,long)}"
             textView23.text = "Wq = Lq/μ(1-P0) = ${formateador(Wq,long)}"
             textView25.text = "ρ = λ/μ = ${formateador(p,long)}"
 
@@ -85,6 +91,12 @@ class RESPUESTAS : AppCompatActivity() {
         }
         else if(tipo == 4){
             supportActionBar?.subtitle = "M/M/S/C"
+            mensaje = "λ = Tasa de llegadas\nμ = Tasa de servicio\n" +
+                    "S = Número de canales de servicio\nC = Tamaño de la población\n" +
+                    "Ls = Número esperado de unidades en el sistema\nLq = Número esperado de unidades en la cola\n" +
+                    "Ws = Tiempo medio de espera en el sistema\n Wq = Tiempo medio de espera en la cola\n" +
+                    "ρ = Probabilidad de encontrar el sistema ocupado\nP0 = Encontrar el sistema vacio\n" +
+                    "Pn = Encontrar n unidades en el sistema\n"
 
             val valores = intent.getDoubleArrayExtra("valores")
             val lambda = valores[0]
@@ -191,7 +203,7 @@ class RESPUESTAS : AppCompatActivity() {
 
         simpleAlert.setButton(AlertDialog.BUTTON_POSITIVE, "OK", {
             dialogInterface, i ->
-            Toast.makeText(applicationContext, "Selecciono OK", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Cerró la información", Toast.LENGTH_SHORT).show()
         })
 
         simpleAlert.show()
@@ -209,7 +221,7 @@ class RESPUESTAS : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_help -> {
-
+                showSimpleAlert()
                 return true
             }
             else -> super.onOptionsItemSelected(item)

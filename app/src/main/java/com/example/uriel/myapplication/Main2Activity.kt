@@ -11,13 +11,21 @@ import java.io.FileInputStream
 
 
 class Main2Activity : AppCompatActivity() {
-
+    var mensaje = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
         title = "Resultados"
         supportActionBar?.subtitle = "M/M/1"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        mensaje = "λ = Tasa de llegadas\nμ = Tasa de servicio\n" +
+                "Ls = Número esperado de unidades en el sistema\nLq = Número esperado de unidades en la cola\n" +
+                "Ws = Tiempo medio de espera en el sistema\n Wq = Tiempo medio de espera en la cola\n" +
+                "Tq = Tiempo en la Cola\n" +
+                "ρ = Probabilidad de encontrar el sistema ocupado\nP0 = Encontrar el sistema vacio\n" +
+                "Pn = Encontrar n unidades en el sistema\n"
+
         val valores = intent.getDoubleArrayExtra("valores")
         val lambda = valores[0]
         val mu = valores[1]
@@ -44,10 +52,10 @@ class Main2Activity : AppCompatActivity() {
 
         textView7.text = "ρ = λ/μ = ${formateador(lambda,long)}/${formateador(mu,long)} = ${formateador(lambda/mu,long)} = ${formateador((lambda/mu)*100,long)}%"
         //textView8.text = "Po = 1-ρ = 1-${lambda/mu} = ${1-(lambda/mu)} = ${(1-(lambda/mu))*100}%"
-        textView2.text = "L = λ/(μ-λ) = ${formateador(lambda,long)}/(${formateador(mu,long)}-${formateador(lambda,long)}) = ${formateador(lambda,long)}/${formateador(mu-lambda,long)} = ${formateador(lambda/(mu-lambda),long)} cliente(s)"
+        textView2.text = "Ls = λ/(μ-λ) = ${formateador(lambda,long)}/(${formateador(mu,long)}-${formateador(lambda,long)}) = ${formateador(lambda,long)}/${formateador(mu-lambda,long)} = ${formateador(lambda/(mu-lambda),long)} cliente(s)"
         textView3.text = "Lq = (λ^2)/(μ*(μ-λ)) = ${formateador((Math.pow(lambda.toDouble(),2.0)),long)}/${formateador((mu*(mu-lambda)),long)} = ${formateador((Math.pow(lambda,2.0)/(mu*(mu-lambda))),long)} cliente(s)"
         textView6.text = "Tq = λ/(μ*(μ-λ)) = ${formateador(lambda,long)}/${formateador(mu*(mu-lambda),long)} = ${formateador(lambda/(mu*(mu-lambda)), long)}"
-        textView4.text = "W = 1/(μ-λ) = 1/${formateador(mu-lambda, long)} = ${formateador(1/(mu-lambda), long)} h = ${formateador((1/(mu-lambda))*60, long)} minutos"
+        textView4.text = "Ws = 1/(μ-λ) = 1/${formateador(mu-lambda, long)} = ${formateador(1/(mu-lambda), long)} h = ${formateador((1/(mu-lambda))*60, long)} minutos"
         textView5.text = "Wq = Lq/λ = ${formateador((Math.pow(lambda.toDouble(),2.0)/(mu*(mu-lambda))),long)}/${formateador(lambda,long)} = ${formateador(((Math.pow(lambda,2.0)/(mu*(mu-lambda)))/lambda),long)} h = ${formateador((((Math.pow(lambda,2.0)/(mu*(mu-lambda)))/lambda)*60), long)} minutos"
         var acumulador = 0.0
         var cadena = ""
@@ -78,11 +86,11 @@ class Main2Activity : AppCompatActivity() {
 
         val simpleAlert = AlertDialog.Builder(this@Main2Activity).create()
         simpleAlert.setTitle("Terminos")
-        simpleAlert.setMessage("replace with message")
+        simpleAlert.setMessage("$mensaje")
 
         simpleAlert.setButton(AlertDialog.BUTTON_POSITIVE, "OK", {
             dialogInterface, i ->
-            Toast.makeText(applicationContext, "Selecciono OK", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Cerró la información", Toast.LENGTH_SHORT).show()
         })
 
         simpleAlert.show()
@@ -100,7 +108,7 @@ class Main2Activity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_help -> {
-
+                showSimpleAlert()
                 return true
             }
             else -> super.onOptionsItemSelected(item)

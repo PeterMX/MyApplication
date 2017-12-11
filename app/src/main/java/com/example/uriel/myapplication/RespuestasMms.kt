@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_respuestas_mms.*
 import java.io.FileInputStream
 
 class RespuestasMms : AppCompatActivity() {
-
+    var mensaje = ""
     //@SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +20,14 @@ class RespuestasMms : AppCompatActivity() {
         title = "Resultados"
         supportActionBar?.subtitle = "M/M/S"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        mensaje = "λ = Tasa de llegadas\nμ = Tasa de servicio\nS = Número de canales de servicio\n" +
+                "Ls = Número esperado de unidades en el sistema\nLq = Número esperado de unidades en la cola\n" +
+                "Lo = Estaciones ocupadas\nLD = Estaciones desocupadas" +
+                "Ws = Tiempo medio de espera en el sistema\n Wq = Tiempo medio de espera en la cola\n" +
+                "ρ = Probabilidad de encontrar el sistema ocupado\nP0 = Encontrar el sistema vacio\n" +
+                "Pn = Encontrar n unidades en el sistema\n"
+
         val fos: FileInputStream?
         var palabra = ""
         try{
@@ -49,11 +57,11 @@ class RespuestasMms : AppCompatActivity() {
         val L = (Lq+(s*(lambda/(mu*s))))
 
         textView15.text = "λ = ${formateador(lambda,long)}, μ = ${formateador(mu,long)} y S = ${s.toInt()}"
-        textView17.text = "L = Lq+Lo = ${formateador(Lq,long)}+${formateador(s*(lambda/(mu*s)),long)} = ${formateador(L,long)}"
+        textView17.text = "Ls = Lq+Lo = ${formateador(Lq,long)}+${formateador(s*(lambda/(mu*s)),long)} = ${formateador(L,long)}"
         textView18.text = "Lq = {[(λ/μ)^S(P0ρ)]/[S!(1-ρ)^2]} = ${formateador(Lq,long)}"
         textView19.text = "Lo = Sρ = ${formateador(s,long)}*${formateador((lambda/(mu*s)),long)} = ${formateador(s*(lambda/(mu*s)),long)}"
         textView20.text = "LD = S-Lo = ${formateador(s,long)}-${formateador(s*(lambda/(mu*s)),long)} = ${formateador(s-(s*(lambda/(mu*s))),long)}"
-        textView22.text = "W = Wq+(1/μ) = L/λ = ${formateador(L,long)}/${formateador(lambda,long)} = ${formateador((L/lambda),long)}"
+        textView22.text = "Ws = Wq+(1/μ) = Ls/λ = ${formateador(L,long)}/${formateador(lambda,long)} = ${formateador((L/lambda),long)}"
         textView23.text = "Wq = Lq/λ = ${formateador(Lq,long)}/${formateador(lambda,long)} = ${formateador((Lq/lambda),long)}"
         textView25.text = "ρ = λ/(μS) = ${formateador(lambda,long)}/${formateador(mu*s,long)} = ${formateador((lambda/(mu*s)),long)}"
 
@@ -109,11 +117,11 @@ class RespuestasMms : AppCompatActivity() {
 
         val simpleAlert = AlertDialog.Builder(this@RespuestasMms).create()
         simpleAlert.setTitle("Terminos")
-        simpleAlert.setMessage("replace with message")
+        simpleAlert.setMessage("$mensaje")
 
         simpleAlert.setButton(AlertDialog.BUTTON_POSITIVE, "OK", {
             dialogInterface, i ->
-            Toast.makeText(applicationContext, "Selecciono OK", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Cerró la información", Toast.LENGTH_SHORT).show()
         })
 
         simpleAlert.show()
@@ -131,7 +139,7 @@ class RespuestasMms : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_help -> {
-
+                showSimpleAlert()
                 return true
             }
             else -> super.onOptionsItemSelected(item)
