@@ -4,6 +4,7 @@ package com.example.uriel.myapplication
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_respuestas_mms.*
+import java.io.FileInputStream
 
 class RespuestasMms : AppCompatActivity() {
 
@@ -15,11 +16,24 @@ class RespuestasMms : AppCompatActivity() {
         title = "Resultados"
         supportActionBar?.subtitle = "M/M/S"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val fos: FileInputStream?
+        var palabra = ""
+        try{
+            fos = openFileInput("decimales")
+            for (letra in fos.readBytes()) palabra += letra.toChar()
+            fos?.close()
+        }catch (e: Exception){
+            println(e.stackTrace)
+        }
+        var long = 5
+        if (palabra.matches("-?\\d+(\\.\\d+)?".toRegex())){
+            long = palabra.toInt()
+        }
         val valores = intent.getDoubleArrayExtra("valores")
         val lambda = valores[0]
         val mu = valores[1]
         val s=valores[2]
-        val long = 5
+        //val long = 5
         var sumatoria = 0.0
         for(n in 0..s.toInt()-1){
             sumatoria += (Math.pow((lambda/mu),n.toDouble())/factorial(n.toLong()))

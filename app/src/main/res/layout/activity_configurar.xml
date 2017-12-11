@@ -7,4 +7,32 @@
     tools:context="com.example.uriel.myapplication.configurar"
     android:background="@color/boton">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Resultados"
+            android:textColor="@color/colorPrimaryDark"
+            tools:layout_editor_absoluteX="163dp"
+            tools:layout_editor_absoluteY="246dp" />
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Número de decimales" />
+
+        <EditText
+            android:id="@+id/editTextDecimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number" />
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

@@ -4,16 +4,31 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_respuestas.*
+import java.io.FileInputStream
 
 class RESPUESTAS : AppCompatActivity() {
-
+    var pn = 5
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_respuestas)
 
         title = "Resultados"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        val long = 5
+        val fos: FileInputStream?
+        var palabra = ""
+        try{
+            fos = openFileInput("decimales")
+            for (letra in fos.readBytes()) palabra += letra.toChar()
+            fos?.close()
+        }catch (e: Exception){
+            println(e.stackTrace)
+        }
+        var long = 5
+        if (palabra.matches("-?\\d+(\\.\\d+)?".toRegex())){
+            long = palabra.toInt()
+            pn = long
+        }
+
         val tipo = intent.getIntExtra("tipo",0)
         if (tipo == 3){
             supportActionBar?.subtitle = "M/M/1/C"
@@ -141,7 +156,7 @@ class RESPUESTAS : AppCompatActivity() {
         finish()
         return true
     }
-    private fun formateador(string:Double, longitud:Int = 5):String{
+    private fun formateador(string:Double, longitud:Int = pn):String{
         when {
             string.isInfinite() -> return "∞"
             string%1 == 0.0 -> return "${string.toInt()}"

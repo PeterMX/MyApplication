@@ -3,9 +3,7 @@ package com.example.uriel.myapplication
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main2.*
-
-
-
+import java.io.FileInputStream
 
 
 class Main2Activity : AppCompatActivity() {
@@ -19,7 +17,19 @@ class Main2Activity : AppCompatActivity() {
         val valores = intent.getDoubleArrayExtra("valores")
         val lambda = valores[0]
         val mu = valores[1]
-        val long = 5
+        val fos: FileInputStream?
+        var palabra = ""
+        try{
+            fos = openFileInput("decimales")
+            for (letra in fos.readBytes()) palabra += letra.toChar()
+            fos?.close()
+        }catch (e: Exception){
+            println(e.stackTrace)
+        }
+        var long = 5
+        if (palabra.matches("-?\\d+(\\.\\d+)?".toRegex())){
+            long = palabra.toInt()
+        }
         textView.text = "Lambda = ${formateador(lambda,long)} y Mu = ${formateador(mu,long)}"
 
         /*val params = view.layoutParams
