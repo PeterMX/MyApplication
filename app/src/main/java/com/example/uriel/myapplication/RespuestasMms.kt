@@ -23,7 +23,7 @@ class RespuestasMms : AppCompatActivity() {
 
         mensaje = "λ = Tasa de llegadas\nμ = Tasa de servicio\nS = Número de canales de servicio\n" +
                 "Ls = Número esperado de unidades en el sistema\nLq = Número esperado de unidades en la cola\n" +
-                "Lo = Estaciones ocupadas\nLD = Estaciones desocupadas" +
+                "Lo = Estaciones ocupadas\nLD = Estaciones desocupadas\n" +
                 "Ws = Tiempo medio de espera en el sistema\n Wq = Tiempo medio de espera en la cola\n" +
                 "ρ = Probabilidad de encontrar el sistema ocupado\nP0 = Encontrar el sistema vacio\n" +
                 "Pn = Encontrar n unidades en el sistema\n"

@@ -92,11 +92,11 @@ class RESPUESTAS : AppCompatActivity() {
         else if(tipo == 4){
             supportActionBar?.subtitle = "M/M/S/C"
             mensaje = "λ = Tasa de llegadas\nμ = Tasa de servicio\n" +
-                    "S = Número de canales de servicio\nC = Tamaño de la población\n" +
+                    "S = Número de canales de servicio\nC o m = Tamaño de la población\n" +
                     "Ls = Número esperado de unidades en el sistema\nLq = Número esperado de unidades en la cola\n" +
                     "Ws = Tiempo medio de espera en el sistema\n Wq = Tiempo medio de espera en la cola\n" +
                     "ρ = Probabilidad de encontrar el sistema ocupado\nP0 = Encontrar el sistema vacio\n" +
-                    "Pn = Encontrar n unidades en el sistema\n"
+                    "Pn = Encontrar n unidades en el sistema\nr = número medio de clientes que se atienden por término medio"
 
             val valores = intent.getDoubleArrayExtra("valores")
             val lambda = valores[0]
@@ -106,20 +106,16 @@ class RESPUESTAS : AppCompatActivity() {
             //val long = 5
             var sumatoria = 0.0
             var sumatoria2 = 0.0
+            var L = 0.0
             for (i in 0 until s.toInt()){
                 sumatoria += (factorial(m.toLong())/(factorial((m-i).toLong())*factorial(i.toLong())))*(Math.pow(lambda/mu,i.toDouble()))
+                //L += i*(factorial(m.toLong())/(factorial((m-i).toLong())*factorial(i.toLong())))*(Math.pow(lambda/mu,i.toDouble()))
             }
             for (i in s.toInt() .. m.toInt()){
                 sumatoria2 += (factorial(m.toLong())/(factorial((m-i).toLong())*factorial(s.toLong())*Math.pow(s,i-s)))*Math.pow(lambda/mu,i.toDouble())
+                //L += i*(factorial(m.toLong())/(factorial((m-i).toLong())*factorial(s.toLong())*Math.pow(s,i-s)))*Math.pow(lambda/mu,i.toDouble())
             }
             val P0 = 1.0/(sumatoria+sumatoria2)
-            val p = lambda/(mu*s)
-            textView19.visibility = View.GONE
-            space19.visibility = View.GONE
-            textView20.visibility = View.GONE
-            space20.visibility = View.GONE
-            textView15.text = "λ = ${formateador(lambda,long)}, μ = ${formateador(mu,long)}, S = ${s.toInt()} y C = ${m.toInt()}"
-            textView25.text = "ρ = λ/μS = ${formateador(p,long)}"
 
             var acumulador: Double
             var cadena = "P0 = 1/Σ[(m!/(m-n)!n!)(λ/μ)^n]+Σ[(m!/(m-n)!S!S^(n-S))(λ/μ)^n] = ${formateador(P0,long)}\n"
@@ -131,16 +127,38 @@ class RESPUESTAS : AppCompatActivity() {
                 if (n<s){
                     cadena += "P${n.toInt()} = [(m!/(m-n)!n!)(λ/μ)^n](P0) = ${formateador(((factorial(m.toLong())/(factorial((m-n).toLong())*factorial(n.toLong())))*(Math.pow(lambda/mu,n)))*(P0))}\n"
                     acumulador += ((factorial(m.toLong())/(factorial((m-n).toLong())*factorial(n.toLong())))*(Math.pow(lambda/mu,n)))*(P0)
+                    L += n*(((factorial(m.toLong())/(factorial((m-n).toLong())*factorial(n.toLong())))*(Math.pow(lambda/mu,n)))*(P0))
                 }
                 else if (n>=s){
                     cadena += "P${n.toInt()} = [(m!/(m-n)!S!S^(n-S))(λ/μ)^n](P0) = ${formateador(((factorial(m.toLong())/(factorial((m-n).toLong())*factorial(s.toLong())*Math.pow(s,n-s)))*Math.pow(lambda/mu,n))*(P0))}\n"
                     acumulador += ((factorial(m.toLong())/(factorial((m-n).toLong())*factorial(s.toLong())*Math.pow(s,n-s)))*Math.pow(lambda/mu,n))*(P0)
+                    L += n*(((factorial(m.toLong())/(factorial((m-n).toLong())*factorial(s.toLong())*Math.pow(s,n-s)))*Math.pow(lambda/mu,n))*(P0))
                 }
 
                 //detener = ((factorial(m.toLong())/factorial((m-n).toLong()))*Math.pow(lambda/mu,m)*(P0))
                 cadena += "acumulado, p${n.toInt()} = ${formateador(acumulador)}\n\n"
                 n++
             }
+
+
+            val r = lambda/mu
+            val p = lambda/(mu*s)
+            val Lq = L-(r*(m-L))
+            val Wq = Lq/(lambda*(m-L))
+            val W = L/(lambda*(m-L))
+
+            textView19.visibility = View.GONE
+            space19.visibility = View.GONE
+            textView20.visibility = View.GONE
+            space20.visibility = View.GONE
+            textView15.text = "λ = ${formateador(lambda,long)}, μ = ${formateador(mu,long)}, S = ${s.toInt()} y C = ${m.toInt()}"
+            textView17.text = "Ls = ΣnPn = ${formateador(L,long)}"
+            textView18.text = "Lq = Ls-r(m-Ls) = ${formateador(Lq,long)}"
+            //textView19.text = "Lo = Sρ = ${formateador(s,long)}*${formateador((lambda/(mu*s)),long)} = ${formateador(s*(lambda/(mu*s)),long)}"
+            //textView20.text = "LD = S-Lo = ${formateador(s,long)}-${formateador(s*(lambda/(mu*s)),long)} = ${formateador(s-(s*(lambda/(mu*s))),long)}"
+            textView22.text = "Ws = Ls/λ(m-Ls) = ${formateador(W,long)}"
+            textView23.text = "Wq = Lq/λ(m-Ls) = ${formateador(Wq,long)}"
+            textView25.text = "ρ = λ/μS = ${formateador(p,long)}"
             textView26.text = cadena
 
         }
